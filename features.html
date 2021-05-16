@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+<link rel="stylesheet" href="quadro2.css">
+<!--CSS do quadro-->
+<link rel="stylesheet" href="style.css">
+<!--CSS da pagina-->
+<link rel="stylesheet" href="postit.css">
+<!--<link rel="stylesheet" href="novopostit.css">-->
+
+<!--Font HandWriting-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+<!--Lib Animacoes em Angular-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+<!-- bootstrap, jquery e jquery ui-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-dragula/1.2.7/dragula.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<body style=" top: 100px;">
+    <div class="container" ng-app="myApp" ng-controller="myCtrl" ng-init="loaddata()">
+
+        <div class="quadro">
+            <!-- BOTOES DO QUADRO-->
+            <span class="fakeButtons fakeClose" onclick="this.parentElement.style.display='none';"></span>
+            <span class="fakeButtons fakeMinimize" onclick="this.parentElement.style.height='15px' ;"></span>
+            <span class="fakeButtons fakeZoom" onclick="this.parentElement.style.height='fit-content'"></span>
+            <span> Boards </span>
+            <span id="handle" style="float:right;"> :::</span>
+
+            <!--<H1>JSON</H1>
+            <p>JSON Recebido</p> {{tabela}}-->
+
+            <H2>Lista de Projetos</H2>
+            <!--<input type='button' ng-click="loaddata()" value='Atualizar dados' style="margin: auto;">-->
+
+            <ul>
+                <h3></h3>
+
+                <li class="list-group-item-danger" ng-repeat="x in resposta" ng-click="carregaQuadro(x)">
+                    <h3></h3>
+                    <b>Board: </b>{{x.nameBoard}} <b>
+                </li>
+            </ul>
+
+            <!--
+                <h1> Lista Dropdown</h1>
+                <p> Selecionar Usuario em Lista recebida de request http</p>
+                <select ng-model="selectedName" ng-options="x.name for x in resposta"></select>
+                <select ng-model="selectedName">
+                    <option ng-repeat="x in resposta">{{x}} </option>
+                </select>
+                <p> Usuario Selecionado: {{selectedName}}</p>
+        -->
+        </div>
+
+        <div class="quadro" id="QuadroBacklog">
+            <!-- BOTOES DO QUADRO-->
+            <!-- BOTOES DO QUADRO-->
+            <span class="fakeButtons fakeClose" onclick="this.parentElement.style.display='none';"></span>
+            <span class="fakeButtons fakeMinimize" onclick="this.parentElement.style.height='15px' ;"></span>
+            <span class="fakeButtons fakeZoom" onclick="this.parentElement.style.height='fit-content'"></span>
+            <span> Product Backlog - {{nomequadro}}</span>
+            <span id="handle" style="float:right;"> :::</span>
+            <!--<h1>Tebela : {{nomequadro}}</h1>-->
+            <br>
+            <br>
+
+            <table style="width: fit-content;">
+                <thead>
+                    <th ng-click="ordem('id')"> Id </th>
+                    <th ng-click="ordem('story')"> Descrição Story </th>
+                    <th ng-click="ordem('normalEst')"> Estimativa Normal </th>
+                    <th ng-click="ordem('safeEst')"> Estimativa Segura </th>
+                    <th ng-click="ordem('depend')"> Dependencias </th>
+                </thead>
+                <tbody dragula="'sprint'" dragula-model="tabela">
+                    <tr ng-repeat="x in tabela | orderBy: minhaordem">
+                        <td style="min-width: 50px;">{{x.id}} </td>
+                        <td>{{ x.story }}</td>
+                        <td>{{ x.normalEst }}</td>
+                        <td>{{ x.safeEst }} </td>
+                        <td>{{ x.depend }} </td>
+                        <td> <input style="display: inline;" type="checkbox" ng-click="criaSprint(x)"> </td>
+                        <td> <span style=" color: gray;cursor: pointer;" ng-click="removeItem(x)">&times;</span> </td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <td><input style="width: 30px;" type="text" ng-model="id" ng-init="id = 1" required></td>
+                    <td><input style="width:auto" type="text" ng-model="story" ng-init="story= 'Definir Story' "
+                            required></td>
+                    <td><input type="text" ng-model="normalEst" ng-init="normalEst= 2" required></td>
+                    <td><input type="text" ng-model="safeEst" ng-init="safeEst= 5" required></td>
+                    <td><input type="text" ng-model="depend" ng-init="depend=[2,3] " required></td>
+                    <td ng-click="salvarStory()"
+                        style="background-color: rgba(144, 238, 144, 0.404);color: green; font-size: 25px;cursor: copy; ">
+                        &#9745;
+                    </td>
+                </tfoot>
+            </table>
+            <p>Quantidade de Histórias: {{tabela.length}} </p>
+        </div>
+
+
+        <!--- QUADRO DO SRPRINT BACKLOG -->
+        <div class="quadro" id="BacklogSprint">
+            <!-- BOTOES DO QUADRO-->
+            <span class="fakeButtons fakeClose" onclick="this.parentElement.style.display='none';"></span>
+            <span class="fakeButtons fakeMinimize" onclick="this.parentElement.style.height= '15px' ;"></span>
+            <span class="fakeButtons fakeZoom" onclick="this.parentElement.style.height='fit-content'"></span>
+            <span> Sprint Backlog </span>
+            <span id="handle" style="float:right; "> :::</span>
+            <h1> Sprint Backlog </h1>
+            <input type="button" value='Priorizar' style="margin: auto;"
+                ng-click="priorizarMoscowRules(tabela,[47, 45, 33, 48, 52, 46, 53, 51, 49, 50, 43, 44], 120)">
+            <br>
+            <table>
+                <tbody>
+                    <thead>
+                        <th ng-click="ordem('$index')"> Id </th>
+                        <th ng-click="ordem('$index')"> Descrição Story </th>
+                        <th ng-click="ordem('name')"> Estimativa Normal </th>
+                        <th ng-click="ordem('nameboard')"> Estimativa Segura </th>
+                        <th ng-click="ordem('nameboard')"> Dependencias </th>
+                        <th ng-click="ordem('nameboard')"> Prioridade </th>
+                    </thead>
+                    <tr ng-repeat="x in listaSprint ">
+                        <td>{{ x.id }}</td>
+                        <td>{{ x.story }}</td>
+                        <td>{{ x.normalEst }}</td>
+                        <td>{{ x.safeEst }} </td>
+                        <td>{{ x.depend }} </td>
+                        <td>{{ x.prioridade }} </td>
+                        <td> <span style=" color: gray;cursor: pointer;"
+                                ng-click="listaSprint.splice($index,1)">&times;</span> </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+
+        <!-- quadro do projeto -->
+
+        <div class='quadro'>
+
+            <div class="grid-container">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+                <div class="grid-item">7</div>
+                <div class="grid-item">8</div>
+            </div>
+        </div>
+        <!-- quadro do projeto -->
+
+
+
+
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dragula/1.2.7/angular-dragula.min.js"></script>
+    <script src='scripts/logica.js'></script> <!-- Logica da pagina -->
+    <script>
+        $(function () {
+            $(".quadro").draggable({ handle: "#handle" });
+        });
+    </script>
+</body>
+
+</html>

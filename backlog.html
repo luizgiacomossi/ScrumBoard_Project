@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Scrum Board</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
+    <!--Lib para plotar graficos Charts.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"
+        integrity="sha512-SuxO9djzjML6b9w9/I07IWnLnQhgyYVSpHZx0JV97kGBfTIsUYlWflyuW4ypnvhBrslz1yJ3R+S14fdCWmSmSA=="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"
+        integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css"
+        integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g=="
+        crossorigin="anonymous" />
+    <!--https://github.com/chartjs/Chart.js-->
+
+    <!--Font HandWriting-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <!--Meu-->
+    <link rel="stylesheet" href="estilopagina.css">
+    <script src="js.js"></script>
+    <script src='dist/dragula.js'></script>
+    <script src='dist/dragula.css'></script>
+    <link rel="stylesheet" href="sticker.css">
+    <link rel="stylesheet" href="quadro.css">
+    <script src="ajax/ajax.js"></script>
+    <!--Conectar com servidor-->
+    <!--Estilo do sticker-->
+</head>
+
+<body>
+
+    <div class='container' style=" resize: both; 
+        overflow: auto;
+        text-align-last: center;
+        color: white;
+        background-color: black; opacity: 65%;
+        border-radius: 25px; 
+        border: 10px;
+        box-shadow: 0px 0px 10px black;">
+        <h1 style="color: white; "> Backlog </h1>
+        <label style="font-size: small;">Mover Quadro</label>
+        <input type="checkbox" id='moverQ' style="position: relative" />
+        <label style="font-size: small;">Mover Historias</label>
+        <input type="checkbox" id='moverH' style="position: relative" checked='checked' value="checked" />
+        <input type="button" id="fullscreen" value="FullScreen">
+        <input type="button" id="contar" value="Contar">
+        <p style="float: right; color: gray; " onclick="$('div:first').hide()"> x</p>
+    </div>
+
+    <div class='quadro'>
+        <div class="container-sm border" " >
+
+            <!-- container do quadro responsivo-->
+            <h1 style=" width:fit-content; ">Product Backlog</h1>
+            <h3> Numero de Historias : <span id="NumHist" style="color: red;"> </span> </h3>
+            <p> Conexão com Servidor: <span id='confirma'></span></p>
+            <table class="table table-hover" id='ProductBacklog'>
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Grupo de Requisito</th>
+                        <th>Descripción</th>
+                        <th>Estimación</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Sprint</th>
+                    </tr>
+                </thead>
+                <tbody>
+<!-- 
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Usabilidad</td>
+                        <td>Como usuario, Eu posso pesquisar documentos assim posso encontralos mais facilmente</td>
+                        <td>2</td>
+                        <td>must have</td>
+                        <td>to do </td>
+                        <td>1</td>
+                    </tr> 
+                -->
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <script>
+        loadDoc();
+    </script>
+
+    <!--Dragula-->
+    <script>//dragula([document.getElementById('ProductBacklog')]);</script>
+    <!--Jquery UI-->
+    <script>
+        $(function () {
+            $(".postit1").droppable({ disabled: false, containment: "#quadro" });
+            $(".postit2").draggable({ disabled: false, containment: "#quadro" });
+            $(".postit3").draggable({ disabled: false, containment: "#quadro" });
+            $(".postit4").draggable({ disabled: false, containment: "#quadro" });
+            $(".quadro").draggable({ disabled: true });
+        });
+    </script>
+    <!--Funçoes Tabela-->
+    <script>
+        conta = document.getElementsByTagName('tr');
+        $('#NumHist').text(conta.length - 1);
+    </script>
+
+</body>

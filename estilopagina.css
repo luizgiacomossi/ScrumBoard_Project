@@ -1,0 +1,14 @@
+
+body {
+    /*background:url('https://www.subtlepatterns.com/patterns/brickwall.png'); */
+    background-size:10%;
+    background-image: url("https://cdn3.struffelproductions.com/file/CC0-Textures/media/tiled/Wood022_LQ.jpg"); 
+
+  }
+
+nav{
+    background-color: black;
+    opacity: 70%;
+    border-radius: 4%;
+
+}

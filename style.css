@@ -1,0 +1,95 @@
+
+    @keyframes animazoom {
+        0% { box-shadow: 0px 0px 0px 1px #726f6f;}
+        50% { box-shadow: 0px 0px 10px 1px #726f6f;}
+        100% { box-shadow: 0px 0px 10px 1px #726f6f; }
+    }
+
+    li{
+        border: solid 2px rgba(110, 242, 141, 0.372);
+        width: fit-content;
+        background-color: #bcefd663;
+        box-shadow: 0px 0px 10px 1px #ffffff86;
+        border-radius: 10px;
+        margin: 5px;
+        padding: 2px ;
+        cursor: pointer;
+        
+    }
+
+    body {
+        background-color: rgb(72, 78, 71);
+        font-family: "Lucida Console", Monaco, monospace;
+        
+    }
+
+
+    table,
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+        flex-direction:; 
+        resize: horizontal;
+        overflow: hidden;
+    }
+
+    input:active {
+        box-shadow: 0px 0px 0px 0px;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+
+   
+    .container {
+        margin-left: 50px;
+        padding-left: 10px;
+        margin-top: 40px;
+        margin-right: 300px;
+        display: grid;
+        grid-template-columns: auto auto ;
+        width: fit-content;
+
+    }
+
+
+    h1,
+    input {
+        display: flex;
+        justify-content: center;
+        background-color: rgba(206, 199, 199, 0.822);
+        background-image: linear-gradient(rgba(108, 108, 108, 0.146), white);
+        border: solid 1px rgb(255, 255, 255);
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 1px #726f6f6c;
+        
+    }
+
+    table {
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+
+    li:hover, td:hover, tr:hover, h1:hover{
+        animation: animazoom 1s forwards;
+        animation-iteration-count: 1;
+        background-image: linear-gradient(rgba(99, 98, 98, 0.311), white);
+
+    }
+
+    span{
+        text-shadow: 1px 2px #00000030;
+    }
+
+    h1,h2{
+        font-family: 'Shadows Into Light', cursive; /*Fonte do quadro*/
+
+    }

@@ -1,0 +1,58 @@
+
+.quadro {
+  background-color: aliceblue;
+  margin:25px auto;
+  border:15px solid black;
+  /*border-image: url(https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 150 round;
+  */
+  height:85vh;
+  width:85vw;
+  box-shadow:  0px 10px 20px 0px black;
+  flex-direction: row;
+  resize: both;
+  overflow: auto;
+  font-family: 'Shadows Into Light', cursive; /*Fonte do quadro*/
+}
+
+.borda {
+  background:white;
+  /*background-image: url("https://i.pinimg.com/236x/35/f0/04/35f0040ec6865c59da5d1fe915ed91c7.jpg");*/
+  height:100%;
+  /* background-image: url("https://cdn3.struffelproductions.com/file/CC0-Textures/media/tiled/Paper003_LQ.jpg"); */
+  width:100%;
+  -webkit-box-shadow: inset 10px 10px 10px 4px rgba(0, 0, 0, .4);
+  box-shadow: inset 3px 7px 2px 5px rgba(0, 0, 0, .4);
+}
+
+.ui-resizable-helper { border: 1px dotted gray; }
+
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto ;
+  grid-gap: 10px;
+  padding: 10px;
+}
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.quadro2 {
+  background-color: aliceblue;
+  margin:25px auto;
+  border:15px solid black;
+  /*border-image: url(https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 150 round;
+  */
+  
+  box-shadow:  0px 10px 20px 0px black;
+  flex-direction: row;
+  resize: both;
+  overflow: auto;
+  font-family: 'Shadows Into Light', cursive; /*Fonte do quadro*/
+}
+
+th,td{
+  font-family: 'Times New Roman', Times, serif;
+}
